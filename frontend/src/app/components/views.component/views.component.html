@@ -1,0 +1,157 @@
+<div class="container">
+  <div class="header">
+    <h1>👁️ Database Views - Vizualizări (Cerința III.f)</h1>
+    <p>Demonstrație vizualizări: simplă editabilă (LMD) și complexă cu statistici</p>
+  </div>
+
+  <div *ngIf="loading" class="loading">Loading views...</div>
+  <div *ngIf="error" class="error">⚠️ {{ error }}</div>
+  <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
+
+  <!-- Tab Navigation -->
+  <div class="tabs">
+    <button 
+      [class.active]="activeTab === 'simple'" 
+      (click)="switchTab('simple')"
+      class="tab-btn">
+      📝 V_COMENZI_EDITABLE (Simple - Editable)
+    </button>
+    <button 
+      [class.active]="activeTab === 'complex'" 
+      (click)="switchTab('complex')"
+      class="tab-btn">
+      📊 V_DETALII_COMENZI (Complex - Statistics)
+    </button>
+  </div>
+
+  <!-- SIMPLE VIEW - Editable -->
+  <div *ngIf="activeTab === 'simple'" class="view-section">
+    <h2>📝 Simple Editable View (V_COMENZI_EDITABLE)</h2>
+    <p class="description">Permite UPDATE și DELETE (LMD Operations)</p>
+
+    <div *ngIf="simpleViews.length === 0" class="no-data">No orders found</div>
+
+    <div class="table-wrapper">
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Client</th>
+            <th>Restaurant</th>
+            <th>Livrator</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of simpleViews" [class.editing]="editingId === order.id_comanda || order.ID_COMANDA">
+            <td><strong>#{{ order.id_comanda || order.ID_COMANDA }}</strong></td>
+            <td>{{ order.client || order.CLIENT || 'N/A' }}</td>
+            <td>{{ order.restaurant || order.RESTAURANT || 'N/A' }}</td>
+            <td>{{ order.livrator || order.LIVRATOR || 'N/A' }}</td>
+            <td>
+              <span 
+                *ngIf="editingId !== (order.id_comanda || order.ID_COMANDA)"
+                [class]="'status ' + (order.status || order.STATUS || 'in-procesare').toLowerCase().replace(' ', '-')">
+                {{ order.status || order.STATUS || 'In procesare' }}
+              </span>
+              <select 
+                *ngIf="editingId === (order.id_comanda || order.ID_COMANDA)"
+                [(ngModel)]="editingStatus"
+                class="status-select">
+                <option *ngFor="let opt of statusOptions" [value]="opt.value">
+                  {{ opt.label }}
+                </option>
+              </select>
+            </td>
+            <td>
+              <div class="action-buttons">
+                <button 
+                  *ngIf="editingId !== (order.id_comanda || order.ID_COMANDA)"
+                  (click)="startEdit(order.id_comanda || order.ID_COMANDA, order.status || order.STATUS)"
+                  class="edit-btn">
+                  ✏️ Edit
+                </button>
+                <button 
+                  *ngIf="editingId === (order.id_comanda || order.ID_COMANDA)"
+                  (click)="updateStatus()"
+                  class="save-btn">
+                  💾 Save
+                </button>
+                <button 
+                  *ngIf="editingId === (order.id_comanda || order.ID_COMANDA)"
+                  (click)="cancelEdit()"
+                  class="cancel-btn">
+                  ❌ Cancel
+                </button>
+                <button 
+                  *ngIf="editingId !== (order.id_comanda || order.ID_COMANDA)"
+                  (click)="deleteOrder(order.id_comanda || order.ID_COMANDA, order.client || order.CLIENT)"
+                  class="delete-btn">
+                  🗑️ Delete
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- COMPLEX VIEW - Statistics -->
+  <div *ngIf="activeTab === 'complex'" class="view-section">
+    <h2>📊 Complex Statistics View (V_DETALII_COMENZI)</h2>
+    <p class="description">Read-only view com agregações: COUNT, SUM, GROUP BY</p>
+
+    <div *ngIf="complexViews.length === 0" class="no-data">No orders found</div>
+
+    <div class="table-wrapper">
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Client</th>
+            <th>Restaurant</th>
+            <th>Rating</th>
+            <th>Livrator</th>
+            <th>Status</th>
+            <th># Produse</th>
+            <th># Plăți</th>
+            <th># Raportări</th>
+            <th>Valoare Totală</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of complexViews">
+            <td><strong>#{{ order.id_comanda || order.ID_COMANDA }}</strong></td>
+            <td>{{ order.client_complet || order.CLIENT_COMPLET || 'N/A' }}</td>
+            <td>{{ order.restaurant_nume || order.RESTAURANT_NUME || 'N/A' }}</td>
+            <td>
+              <span class="rating">
+                ⭐ {{ order.restaurant_rating || order.RESTAURANT_RATING || '0' }}
+              </span>
+            </td>
+            <td>{{ order.livrator_complet || order.LIVRATOR_COMPLET || 'N/A' }}</td>
+            <td>
+              <span [class]="'status ' + (order.status_comanda || order.STATUS_COMANDA || 'in-procesare').toLowerCase().replace(' ', '-')">
+                {{ order.status_comanda || order.STATUS_COMANDA || 'In procesare' }}
+              </span>
+            </td>
+            <td>
+              <span class="badge badge-products">{{ order.numar_produse || order.NUMAR_PRODUSE || '0' }}</span>
+            </td>
+            <td>
+              <span class="badge badge-payments">{{ order.numar_plati || order.NUMAR_PLATI || '0' }}</span>
+            </td>
+            <td>
+              <span class="badge badge-reports">{{ order.numar_raportari || order.NUMAR_RAPORTARI || '0' }}</span>
+            </td>
+            <td>
+              <strong class="amount">{{ order.valoare_totala_comenzi || order.VALOARE_TOTALA_COMENZI || '0' }} RON</strong>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

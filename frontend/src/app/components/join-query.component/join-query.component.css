@@ -1,0 +1,147 @@
+* {
+	box-sizing: border-box;
+}
+
+.container {
+	max-width: 1100px;
+	margin: 32px auto;
+	padding: 24px;
+	background: linear-gradient(135deg, #0f172a 0%, #111827 70%);
+	border: 1px solid #1f2937;
+	border-radius: 16px;
+	color: #e5e7eb;
+	box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+.header {
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
+	gap: 16px;
+	margin-bottom: 20px;
+}
+
+.eyebrow {
+	letter-spacing: 0.15em;
+	text-transform: uppercase;
+	font-size: 11px;
+	color: #93c5fd;
+	margin: 0 0 6px;
+}
+
+h2 {
+	margin: 0;
+	font-size: 24px;
+	color: #f9fafb;
+}
+
+.subtitle {
+	margin: 6px 0 0;
+	color: #9ca3af;
+}
+
+
+.filters {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 14px;
+	padding: 14px;
+	background: rgba(255, 255, 255, 0.02);
+	border: 1px solid #1f2937;
+	border-radius: 12px;
+	margin-bottom: 16px;
+}
+
+.filter-group {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.filter-group.full {
+	grid-column: span 2;
+}
+
+label {
+	font-size: 13px;
+	color: #cbd5e1;
+}
+
+select,
+input[type="text"] {
+	width: 100%;
+	padding: 10px 12px;
+	border-radius: 10px;
+	border: 1px solid #334155;
+	background: #0b1221;
+	color: #e2e8f0;
+	font-size: 14px;
+	outline: none;
+}
+
+select:focus,
+input[type="text"]:focus {
+	border-color: #2563eb;
+	box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25);
+}
+
+.styled-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 10px;
+	overflow: hidden;
+	border-radius: 12px;
+	background: #0b1221;
+	border: 1px solid #1f2937;
+}
+
+.styled-table thead {
+	background: linear-gradient(135deg, #1d4ed8, #0ea5e9);
+	color: #e5e7eb;
+}
+
+.styled-table th,
+.styled-table td {
+	padding: 12px 14px;
+	text-align: left;
+	border-bottom: 1px solid #111827;
+}
+
+.styled-table tbody tr:nth-child(odd) {
+	background: rgba(255, 255, 255, 0.01);
+}
+
+.styled-table tbody tr:hover {
+	background: rgba(59, 130, 246, 0.08);
+}
+
+.status {
+	margin-top: 16px;
+	padding: 12px 14px;
+	border-radius: 10px;
+	background: rgba(59, 130, 246, 0.12);
+	color: #cbd5e1;
+	border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.status.error {
+	background: rgba(248, 113, 113, 0.12);
+	border-color: rgba(248, 113, 113, 0.3);
+	color: #fecaca;
+}
+
+@media (max-width: 640px) {
+	.container {
+		margin: 16px;
+		padding: 18px;
+	}
+
+	.header {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.filter-group.full {
+		grid-column: span 1;
+	}
+}

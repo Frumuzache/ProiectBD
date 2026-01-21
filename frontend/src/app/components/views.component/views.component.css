@@ -1,0 +1,336 @@
+.container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background: linear-gradient(135deg, #0f172a 0%, #111827 100%);
+  border-radius: 12px;
+  color: #e5e7eb;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #1f2937;
+}
+
+.header h1 {
+  margin: 0 0 10px 0;
+  font-size: 28px;
+  color: #f3f4f6;
+  background: linear-gradient(135deg, #3b82f6, #0ea5e9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.header p {
+  margin: 0;
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px 20px;
+  background: rgba(31, 41, 55, 0.5);
+  border-radius: 8px;
+  color: #60a5fa;
+  font-size: 16px;
+}
+
+.error {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid #ef4444;
+  color: #fca5a5;
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.success {
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid #22c55e;
+  color: #86efac;
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #1f2937;
+}
+
+.tab-btn {
+  padding: 12px 20px;
+  background: rgba(31, 41, 55, 0.5);
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: #9ca3af;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+  color: #e5e7eb;
+  background: rgba(31, 41, 55, 0.8);
+}
+
+.tab-btn.active {
+  color: #3b82f6;
+  border-bottom-color: #3b82f6;
+}
+
+.view-section {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.view-section h2 {
+  margin: 0 0 5px 0;
+  font-size: 20px;
+  color: #f3f4f6;
+}
+
+.description {
+  margin: 0 0 20px 0;
+  color: #9ca3af;
+  font-size: 13px;
+}
+
+.no-data {
+  text-align: center;
+  padding: 40px 20px;
+  color: #9ca3af;
+  background: rgba(31, 41, 55, 0.5);
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid #374151;
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(31, 41, 55, 0.7);
+  font-size: 13px;
+}
+
+.styled-table thead tr {
+  background: rgba(17, 24, 39, 0.8);
+  border-bottom: 2px solid #374151;
+}
+
+.styled-table th {
+  padding: 12px 15px;
+  text-align: left;
+  color: #f3f4f6;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 12px;
+}
+
+.styled-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #1f2937;
+  color: #d1d5db;
+}
+
+.styled-table tbody tr {
+  transition: all 0.2s ease;
+}
+
+.styled-table tbody tr:hover {
+  background: rgba(31, 41, 55, 0.9);
+}
+
+.styled-table tbody tr.editing {
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.status {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.status.livrat {
+  background: rgba(34, 197, 94, 0.2);
+  color: #86efac;
+}
+
+.status.in-procesare,
+.status.in-pregatire {
+  background: rgba(251, 146, 60, 0.2);
+  color: #fed7aa;
+}
+
+.status.in-livrare {
+  background: rgba(59, 130, 246, 0.2);
+  color: #93c5fd;
+}
+
+.status.anulat {
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+}
+
+.status-select {
+  padding: 6px 8px;
+  background: rgba(31, 41, 55, 0.8);
+  border: 1px solid #3b82f6;
+  color: #f3f4f6;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.edit-btn,
+.save-btn,
+.cancel-btn,
+.delete-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.edit-btn {
+  background: rgba(59, 130, 246, 0.2);
+  color: #93c5fd;
+  border: 1px solid #3b82f6;
+}
+
+.edit-btn:hover {
+  background: rgba(59, 130, 246, 0.3);
+}
+
+.save-btn {
+  background: rgba(34, 197, 94, 0.2);
+  color: #86efac;
+  border: 1px solid #10b981;
+}
+
+.save-btn:hover {
+  background: rgba(34, 197, 94, 0.3);
+}
+
+.cancel-btn {
+  background: rgba(107, 114, 128, 0.2);
+  color: #d1d5db;
+  border: 1px solid #6b7280;
+}
+
+.cancel-btn:hover {
+  background: rgba(107, 114, 128, 0.3);
+}
+
+.delete-btn {
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+  border: 1px solid #ef4444;
+}
+
+.delete-btn:hover {
+  background: rgba(239, 68, 68, 0.3);
+}
+
+.rating {
+  color: #fbbf24;
+  font-weight: 500;
+}
+
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  min-width: 30px;
+  text-align: center;
+}
+
+.badge-products {
+  background: rgba(16, 185, 129, 0.2);
+  color: #6ee7b7;
+}
+
+.badge-payments {
+  background: rgba(59, 130, 246, 0.2);
+  color: #93c5fd;
+}
+
+.badge-reports {
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+}
+
+.amount {
+  color: #22c55e;
+  font-size: 14px;
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 15px;
+    margin: 10px;
+  }
+
+  .header h1 {
+    font-size: 22px;
+  }
+
+  .tabs {
+    flex-direction: column;
+  }
+
+  .tab-btn {
+    width: 100%;
+  }
+
+  .styled-table {
+    font-size: 12px;
+  }
+
+  .styled-table th,
+  .styled-table td {
+    padding: 8px 10px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .action-buttons button {
+    width: 100%;
+  }
+}

@@ -1,0 +1,48 @@
+<div class="container">
+	<div class="header">
+		<div>
+			<p class="eyebrow">Cerința III.c</p>
+			<h2>Join pe 3 tabele cu 2 condiții</h2>
+			<p class="subtitle">Client • Comandă • Restaurant — filtre după status și notă minimă</p>
+		</div>
+	</div>
+
+	<div class="filters">
+		<div class="filter-group">
+			<label>Status comandă</label>
+			<select [(ngModel)]="selectedStatus" (change)="onFiltersChange()">
+				<option *ngFor="let s of statusOptions" [value]="s.value">{{ s.label }}</option>
+			</select>
+		</div>
+
+		<div class="filter-group">
+			<label>Notă restaurant</label>
+			<select [(ngModel)]="selectedRating" (change)="onFiltersChange()">
+				<option *ngFor="let r of ratingOptions" [value]="r.value">{{ r.label }}</option>
+			</select>
+		</div>
+
+		<div class="filter-group full">
+			<label>Caută restaurant</label>
+			<input type="text" [(ngModel)]="searchRestaurant" (input)="applyFilters()" placeholder="Ex: Bistro" />
+		</div>
+	</div>
+
+	<div *ngIf="loading" class="status">Se încarcă datele...</div>
+	<div *ngIf="error" class="status error">{{ error }}</div>
+
+	<table class="styled-table" *ngIf="!loading && !error && filteredData.length > 0">
+		<thead>
+			<tr>
+				<th *ngFor="let col of columns">{{ col }}</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let row of filteredData">
+				<td *ngFor="let col of columns">{{ row[col] }}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<div *ngIf="!loading && !error && filteredData.length === 0" class="status">Nu există rezultate pentru condițiile selectate.</div>
+</div>

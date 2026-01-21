@@ -1,0 +1,140 @@
+/* Containerul principal */
+.container {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 25px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h2 {
+  color: #2c3e50;
+  margin-bottom: 10px;
+  border-left: 5px solid #007bff;
+  padding-left: 15px;
+}
+
+/* Secțiunea de selecție tabel */
+.selector-wrapper {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.selector-wrapper label {
+  font-weight: 600;
+  color: #495057;
+}
+
+.custom-select {
+  padding: 10px 15px;
+  border: 2px solid #dee2e6;
+  border-radius: 6px;
+  background-color: white;
+  font-size: 16px;
+  color: #495057;
+  cursor: pointer;
+  transition: border-color 0.3s;
+  min-width: 250px;
+}
+
+.custom-select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Stilarea Tabelului (Cerința III.a) */
+.table-responsive {
+  overflow-x: auto;
+  margin-top: 10px;
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+  font-size: 0.95em;
+  min-width: 400px;
+  border-radius: 8px 8px 0 0;
+  overflow: hidden;
+}
+
+.styled-table thead tr {
+  background-color: #007bff;
+  color: #ffffff;
+  text-align: left;
+  font-weight: bold;
+}
+
+.styled-table th {
+  padding: 12px 15px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s;
+  position: relative;
+}
+
+.styled-table th:hover {
+  background-color: #0056b3;
+}
+
+/* Indicator de sortare */
+.styled-table th::after {
+  content: ' ↕';
+  font-size: 0.8em;
+  opacity: 0.6;
+}
+
+.styled-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr {
+  transition: background-color 0.2s;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:hover {
+  background-color: #e9ecef;
+  color: #007bff;
+}
+
+/* Mesaj No Data */
+.no-data-container {
+  text-align: center;
+  padding: 50px;
+  border: 2px dashed #dee2e6;
+  border-radius: 8px;
+  color: #6c757d;
+  margin-top: 20px;
+}
+
+/* Butonul Înapoi */
+.btn-back {
+  margin-top: 25px;
+  padding: 12px 25px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s, transform 0.2s;
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-back:hover {
+  background-color: #5a6268;
+  transform: translateX(-5px);
+}

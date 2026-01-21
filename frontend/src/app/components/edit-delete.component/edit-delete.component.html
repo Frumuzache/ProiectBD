@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="header">
+    <h1>✏️ Edit & Delete - Modificare Informații (Cerința III.b)</h1>
+    <p>Editare inline și ștergere pentru fiecare înregistrare din baza de date Oracle</p>
+  </div>
+
+  <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+  <div class="selector-box">
+    <label>Selectează tabelul pentru editare:</label>
+    <select class="custom-select" [(ngModel)]="selectedTable" (ngModelChange)="loadData()">
+      <option *ngFor="let t of tables" [value]="t">{{ t }}</option>
+    </select>
+  </div>
+
+  <div class="table-wrapper" *ngIf="data.length > 0; else noData">
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th *ngFor="let col of columns">{{ col }}</th>
+          <th class="actions-header">Acțiuni</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of data" [class.editing]="isEditing(row)">
+          <td *ngFor="let col of columns">
+            <span *ngIf="!isEditing(row)">{{ row[col] }}</span>
+            <input 
+              *ngIf="isEditing(row)" 
+              [(ngModel)]="editingData[col]"
+              [readonly]="col === columns[0]"
+              [class.readonly-input]="col === columns[0]"
+              class="edit-input"
+              type="text">
+          </td>
+          <td>
+            <div class="action-buttons">
+              <button 
+                *ngIf="!isEditing(row)"
+                (click)="startEdit(row)"
+                class="edit-btn">
+                ✏️ Edit
+              </button>
+              <button 
+                *ngIf="isEditing(row)"
+                (click)="saveEdit()"
+                class="save-btn">
+                💾 Save
+              </button>
+              <button 
+                *ngIf="isEditing(row)"
+                (click)="cancelEdit()"
+                class="cancel-btn">
+                ❌ Cancel
+              </button>
+              <button 
+                *ngIf="!isEditing(row)"
+                (click)="onDelete(row)"
+                class="delete-btn">
+                🗑️ Delete
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #noData>
+    <div class="no-data">Nu există date de modificat în acest tabel.</div>
+  </ng-template>
+
+  <button class="btn-back" routerLink="/">⬅ Înapoi la Meniu</button>
+</div>

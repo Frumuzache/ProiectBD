@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="header">
+    <h1>🗑️ ON DELETE CASCADE Demonstration</h1>
+    <p>Deleting an order will automatically delete all associated payments, products, and reports (CASCADE constraint)</p>
+  </div>
+
+  <div *ngIf="loading" class="loading">Loading orders and reports...</div>
+  <div *ngIf="error" class="error">⚠️ {{ error }}</div>
+  <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
+
+  <div class="orders-list">
+    <div *ngFor="let order of orders" class="order-card">
+      <div class="order-header" (click)="toggleExpand(order.id_comanda)">
+        <div class="order-title">
+          <strong>Order #{{ order.id_comanda }}</strong>
+          <span class="client">{{ order.client }}</span>
+          <span class="restaurant">{{ order.restaurant }}</span>
+          <span class="status" [ngClass]="order.status.toLowerCase().replace(' ', '-')">{{ order.status }}</span>
+        </div>
+        <div class="report-badge">
+          {{ order.payments.length }} Payment{{ order.payments.length !== 1 ? 's' : '' }} • 
+          {{ order.items.length }} Product{{ order.items.length !== 1 ? 's' : '' }} • 
+          {{ order.reports.length }} Report{{ order.reports.length !== 1 ? 's' : '' }}
+        </div>
+        <span class="expand-icon">{{ expandedOrderId === order.id_comanda ? '▼' : '▶' }}</span>
+      </div>
+
+      <div *ngIf="expandedOrderId === order.id_comanda" class="order-details">
+        <!-- Payments Section -->
+        <div class="cascade-section">
+          <h3>💳 Payments (Will be CASCADE DELETED):</h3>
+          <div *ngIf="order.payments.length === 0" class="no-data-item">
+            ✓ No payments for this order
+          </div>
+          <div *ngFor="let payment of order.payments" class="data-item payment-item">
+            <div class="item-id">#{{ payment.id_plata || payment.ID_PLATA }}</div>
+            <div class="item-content">
+              <strong>Payment ID:</strong> {{ payment.id_plata || payment.ID_PLATA }}<br>
+              <strong>Amount Due:</strong> {{ payment.ramas_de_plata || payment.RAMAS_DE_PLATA }} RON<br>
+              <strong>Card:</strong> **** **** **** {{ (payment.nr_card || payment.NR_CARD)?.slice(-4) }}<br>
+              <strong>Date:</strong> {{ (payment.data_plata || payment.DATA_PLATA) | date: 'short' }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Products Section -->
+        <div class="cascade-section">
+          <h3>🍔 Products in Order (Will be CASCADE DELETED):</h3>
+          <div *ngIf="order.items.length === 0" class="no-data-item">
+            ✓ No products in this order
+          </div>
+          <div *ngFor="let item of order.items" class="data-item product-item">
+            <div class="item-id">×{{ item.cantitate || item.CANTITATE }}</div>
+            <div class="item-content">
+              <strong>Product ID:</strong> {{ item.id_produs || item.ID_PRODUS }}<br>
+              <strong>Quantity:</strong> {{ item.cantitate || item.CANTITATE }} items
+            </div>
+          </div>
+        </div>
+
+        <!-- Reports Section -->
+        <div class="cascade-section">
+          <h3>📋 Reports (Will be CASCADE DELETED):</h3>
+          <div *ngIf="order.reports.length === 0" class="no-data-item">
+            ✓ No reports for this order
+          </div>
+          <div *ngFor="let report of order.reports" class="data-item report-item">
+            <div class="item-id">#{{ report.id_raportare }}</div>
+            <div class="item-content">
+              <strong>Report ID:</strong> {{ report.id_raportare }}<br>
+              <strong>Date:</strong> {{ report.data_deschidere | date: 'short' }}<br>
+              <strong>Issue:</strong> {{ report.descriere_problema }}
+            </div>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button class="delete-btn" (click)="onDelete(order.id_comanda, order.client)">
+            🗑️ DELETE ORDER & CASCADE ALL DATA
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && orders.length === 0" class="no-data">
+    No orders found. Click on an order to expand and see associated reports.
+  </div>
+</div>
